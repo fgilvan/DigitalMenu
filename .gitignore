@@ -1,0 +1,12 @@
+/Server/obj
+/.vscode
+/Server/DigitalMenu.API/obj
+/Server/DigitalMenu.API/bin
+/Server/DigitalMenu.Application/obj
+/Server/DigitalMenu.Application/bin
+/Server/DigitalMenu.Core/obj
+/Server/DigitalMenu.Core/bin
+/Server/DigitalMenu.Infrastructure/obj
+/Server/DigitalMenu.Infrastructure/bin
+/Server/.vs
+/Server/DigitalMenu.API/.vs
