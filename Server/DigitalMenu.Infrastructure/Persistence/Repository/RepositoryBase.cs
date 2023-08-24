@@ -21,10 +21,9 @@ namespace DigitalMenu.Infrastructure.Persistence.Repository
 
         public async Task<TObj[]> GetAll()
         {
-            ////TODO: Verificar alternativa
-            //var query = ApplicationDbContext.Product;
-            throw new NotImplementedException();
-            //return await query.AsNoTracking().OrderBy(x => x.Id).ToArrayAsync();
+            var query = ApplicationDbContext.Set<TObj>();
+
+            return await query.AsNoTracking().OrderBy(x => x.Id).ToArrayAsync();
         }
 
         public async Task<TObj> Get(Guid id, bool asNoTraking)
