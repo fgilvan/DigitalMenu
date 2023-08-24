@@ -18,7 +18,7 @@ namespace DigitalMenu.Infrastructure
     {
         public static IServiceCollection AddInfrastructServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=DigitalMenu;User Id=sa;Password=admin;TrustServerCertificate=True;"));
+            services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             //Services
             services.AddScoped<IServiceProduct, ServiceProduct>();
