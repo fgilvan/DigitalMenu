@@ -1,4 +1,4 @@
-using DigitalMenu.Application.Common.Mapping;
+using DigitalMenu.Application.Common.Automapper;
 using DigitalMenu.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddAutoMapper(typeof(ProductMap));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
