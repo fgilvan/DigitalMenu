@@ -32,7 +32,7 @@ namespace DigitalMenu.Application.Model.Product
 
             RuleFor(x => x.Name)
                 .MaximumLength(50)
-                .WithMessage("Nome do produto não pode ultrapassar 50 caracteres");
+                .WithMessage("Nome do produto não pode ultrapassar 50 caracteres.");
         }
 
         #endregion
