@@ -1,4 +1,5 @@
-﻿using DigitalMenu.Application.Interfaces;
+﻿using DigitalMenu.Application.Exceptions;
+using DigitalMenu.Application.Interfaces;
 using DigitalMenu.Application.Model;
 using DigitalMenu.Application.Model.Product;
 using Microsoft.AspNetCore.Mvc;
@@ -37,12 +38,13 @@ namespace DigitalMenu.API.Controllers
         {
             try
             {
-                var models = await _service.Get(id);
+                var model = await _service.Get(id);
 
-                if (models == null)
-                    return NotFound();
-
-                return Ok(models);
+                return Ok(model);
+            }
+            catch(NotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -59,6 +61,10 @@ namespace DigitalMenu.API.Controllers
 
                 return Created(Route + model.Id, model);
             }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -74,6 +80,10 @@ namespace DigitalMenu.API.Controllers
 
                 return Created(Route + model.Id, model);
             }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -88,6 +98,10 @@ namespace DigitalMenu.API.Controllers
                 await _service.Delete(id);
 
                 return Ok(Route);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

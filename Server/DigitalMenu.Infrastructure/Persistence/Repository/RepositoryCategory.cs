@@ -1,4 +1,5 @@
-﻿using DigitalMenu.Core.Entities.Product;
+﻿using DigitalMenu.Core.Entities.Category;
+using DigitalMenu.Core.Entities.Product;
 using DigitalMenu.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DigitalMenu.Infrastructure.Persistence.Repository
 {
-    public class RepositoryProduct : RepositoryBase<ProductObj>,IRepositoryProduct
+    public class RepositoryCategory : RepositoryBase<CategoryObj>, IRepositoryCategory
     {
-        public RepositoryProduct(ApplicationDbContext applicationDbContext)
+        public RepositoryCategory(ApplicationDbContext applicationDbContext)
             :base(applicationDbContext)
         {
         }

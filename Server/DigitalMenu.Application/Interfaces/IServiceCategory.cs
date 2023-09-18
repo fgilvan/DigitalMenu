@@ -1,4 +1,5 @@
-﻿using DigitalMenu.Application.Model.Product;
+﻿using DigitalMenu.Application.Model.Category;
+using DigitalMenu.Application.Model.Product;
 using DigitalMenu.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DigitalMenu.Application.Interfaces
 {
-    public interface IServiceProduct: IServiceBase<ProductModel>
+    public interface IServiceCategory : IServiceBase<CategoryModel>
     {
     }
 }

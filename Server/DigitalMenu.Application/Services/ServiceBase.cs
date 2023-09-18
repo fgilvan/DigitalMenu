@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using DigitalMenu.Application.Exceptions;
 using DigitalMenu.Application.Interfaces;
 using DigitalMenu.Application.Model.Product;
 using DigitalMenu.Core.Entities;
 using DigitalMenu.Core.Entities.Product;
 using DigitalMenu.Core.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +39,11 @@ namespace DigitalMenu.Application.Services
         {
             var obj = await _repository.Get(id, false);
 
+            if (obj == null)
+            {
+                throw new NotFoundException("Registro Não Encontrado.");
+            }
+
             var model = _mapper.Map<TModel>(obj);
 
             return model;
@@ -57,7 +64,7 @@ namespace DigitalMenu.Application.Services
 
             if(obj == null)
             {
-                throw new InvalidOperationException();
+                throw new NotFoundException("Registro Não Encontrado.");
             }
 
             obj = _mapper.Map<TObj>(model);
@@ -72,7 +79,7 @@ namespace DigitalMenu.Application.Services
 
             if (obj == null)
             {
-                throw new InvalidOperationException();
+                throw new NotFoundException("Registro Não Encontrado.");
             }
 
             _repository.Delete(obj);

@@ -27,7 +27,7 @@ namespace DigitalMenu.Tests.AutomapperTest
         {
             var productModel = GetDefaultModel();
 
-            var obj = _mapper.Map<Product>(productModel);
+            var obj = _mapper.Map<ProductObj>(productModel);
 
             Assert.That(obj.Name, Is.EqualTo(productModel.Name));
             Assert.That(obj.Description, Is.EqualTo(productModel.Description));
@@ -56,9 +56,9 @@ namespace DigitalMenu.Tests.AutomapperTest
             };
         }
 
-        private Product GetDefaultObj()
+        private ProductObj GetDefaultObj()
         {
-            return new Product
+            return new ProductObj
             {
                 Id = Guid.NewGuid(),
                 Name = "ProductModel 1",

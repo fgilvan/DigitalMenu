@@ -1,4 +1,5 @@
-﻿using DigitalMenu.Core.Entities.Product;
+﻿using DigitalMenu.Core.Entities.Category;
+using DigitalMenu.Core.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DigitalMenu.Core.Interfaces
 {
-    public interface IRepositoryProduct: IRepositoryBase<ProductObj>
+    public interface IRepositoryCategory : IRepositoryBase<CategoryObj>
     {
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using DigitalMenu.Application.Interfaces;
+using DigitalMenu.Application.Model.Category;
 using DigitalMenu.Application.Model.Product;
 using DigitalMenu.Core.Entities;
+using DigitalMenu.Core.Entities.Category;
 using DigitalMenu.Core.Entities.Product;
 using DigitalMenu.Core.Interfaces;
 using System;
@@ -13,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace DigitalMenu.Application.Services
 {
-    public class ServiceProduct: ServiceBase<ProductModel, ProductObj>, IServiceProduct
+    public class ServiceCategory : ServiceBase<CategoryModel, CategoryObj>, IServiceCategory
     {
-        public ServiceProduct(IRepositoryProduct repositoryProduct, IMapper mapper)
-            :base(repositoryProduct, mapper)
+        public ServiceCategory(IRepositoryCategory repositoryCategory, IMapper mapper)
+            :base(repositoryCategory, mapper)
         {
         }
     }
