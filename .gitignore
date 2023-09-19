@@ -10,3 +10,5 @@
 /Server/DigitalMenu.Infrastructure/bin
 /Server/.vs
 /Server/DigitalMenu.API/.vs
+/Server/DigitalMenu.Tests/bin
+/Server/DigitalMenu.Tests/obj
