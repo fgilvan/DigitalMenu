@@ -12,6 +12,6 @@ namespace DigitalMenu.Application.Model.Product
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public CategoryModel Category { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

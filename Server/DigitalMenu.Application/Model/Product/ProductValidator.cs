@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using DigitalMenu.Application.Interfaces;
+using FluentValidation;
+using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,15 @@ namespace DigitalMenu.Application.Model.Product
 {
     public class ProductValidator: AbstractValidator<ProductModel>
     {
-        public ProductValidator() 
+        private IServiceCategory _serviceCategory;
+
+        public ProductValidator(IServiceCategory serviceCategory) 
         {
+            _serviceCategory = serviceCategory;
+
             ValidatorName();
             ValidatorDescription();
+            ValidatorCategory();
         }
 
         #region PRIVATE METHODS
@@ -33,6 +40,27 @@ namespace DigitalMenu.Application.Model.Product
             RuleFor(x => x.Name)
                 .MaximumLength(50)
                 .WithMessage("Nome do produto não pode ultrapassar 50 caracteres.");
+        }
+
+        private void ValidatorCategory()
+        {
+            RuleFor(x => x.CategoryId)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("Categoria do produto é obrigatório.");
+
+            RuleFor(x => x.CategoryId)
+                .Must(VerifyCategory)
+                .When(x => x.CategoryId != Guid.Empty)
+                .WithMessage("Categoria do produto é inválida.");
+        }
+
+
+        private bool VerifyCategory(Guid idCategory)
+        {
+            var retorno = _serviceCategory.Exist(idCategory);
+
+            return retorno.Result;
         }
 
         #endregion

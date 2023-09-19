@@ -49,6 +49,13 @@ namespace DigitalMenu.Application.Services
             return model;
         }
 
+        public async Task<bool> Exist(Guid id)
+        {
+            var obj = await _repository.Get(id, false);
+
+            return obj != null;
+        }
+
         public async Task Add(TModel model)
         {
             var obj = _mapper.Map<TObj>(model);

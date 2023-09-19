@@ -23,7 +23,7 @@ namespace DigitalMenu.Infrastructure
     {
         public static IServiceCollection AddInfrastructServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(x => x.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ProductValidator>());
 
             //Services

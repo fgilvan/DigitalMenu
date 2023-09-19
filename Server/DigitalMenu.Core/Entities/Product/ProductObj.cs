@@ -12,6 +12,6 @@ namespace DigitalMenu.Core.Entities.Product
         public string Name { get; set; }
         public string Description { get; set; }
         public Guid CategoryId { get; set; }
-        public virtual CategoryObj Category { get; set; }
+        public CategoryObj Category { get; set; }
     }
 }

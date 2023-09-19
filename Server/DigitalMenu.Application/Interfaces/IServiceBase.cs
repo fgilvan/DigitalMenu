@@ -14,6 +14,8 @@ namespace DigitalMenu.Application.Interfaces
 
         Task<T> Get(Guid id);
 
+        Task<bool> Exist(Guid id);
+
         Task Add(T entity);
 
         Task Update(Guid id, T entity);
