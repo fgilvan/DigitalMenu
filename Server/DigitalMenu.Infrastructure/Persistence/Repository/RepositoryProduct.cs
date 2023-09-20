@@ -16,11 +16,12 @@ namespace DigitalMenu.Infrastructure.Persistence.Repository
         {
         }
 
-        public Task<ProductObj> GetByName(string name)
+        public async Task<ProductObj> GetByName(string name)
         {
-            var obj = ApplicationDbContext.Product.FirstOrDefaultAsync(x => x.Name == name);
+            var obj = await ApplicationDbContext.Product.FirstOrDefaultAsync(x => x.Name == name);
 
-            ApplicationDbContext.Entry(obj).State = EntityState.Detached;
+            if (obj != null) 
+                ApplicationDbContext.Entry(obj).State = EntityState.Detached;
 
             return obj;
         }

@@ -44,9 +44,10 @@ namespace DigitalMenu.Application.Model.Product
                 .MaximumLength(50)
                 .WithMessage("Nome do produto não pode ultrapassar 50 caracteres.");
 
-            RuleFor(x => x.Name)
-                .Must(x => _serviceProduct.GetByName(x).Result == null)
+            RuleFor(x => x)
+                .Must(AlreadyUsedName)
                 .When(x =>  x.Name.HasValue())
+                .OverridePropertyName(x => x.Name)
                 .WithMessage("Nome já utilizado por outro produto.");
         }
 
@@ -63,6 +64,12 @@ namespace DigitalMenu.Application.Model.Product
                 .WithMessage("Categoria do produto é inválida.");
         }
 
+        private bool AlreadyUsedName(ProductModel model)
+        {
+            var databaseModel = _serviceProduct.GetByName(model.Name).Result;
+
+            return databaseModel == null || databaseModel.Id == model.Id;
+        }
 
         private bool VerifyCategory(Guid idCategory)
         {
