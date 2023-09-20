@@ -53,6 +53,7 @@ namespace DigitalMenu.Tests.AutomapperTest
                 Id = Guid.NewGuid(),
                 Name = "ProductModel 1",
                 Description = "ProductModel description 1",
+                CategoryId = Guid.NewGuid(),
             };
         }
 
@@ -63,6 +64,7 @@ namespace DigitalMenu.Tests.AutomapperTest
                 Id = Guid.NewGuid(),
                 Name = "ProductModel 1",
                 Description = "ProductModel description 1",
+                CategoryId = Guid.NewGuid(),
             };
         }
 
