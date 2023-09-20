@@ -10,19 +10,25 @@ namespace DigitalMenu.Tests
     {
         private ProductValidator _validator;
         private Mock<IServiceCategory> _mockCategory;
+        private Mock<IServiceProduct> _mockProduct;
 
         [SetUp]
         public void Setup()
         {
             _mockCategory = new Mock<IServiceCategory>();
-            _validator = new ProductValidator(_mockCategory.Object);
+            _mockProduct = new Mock<IServiceProduct>();
+
+            _validator = new ProductValidator(_mockCategory.Object, _mockProduct.Object);
         }
 
         [Test]
         public void ProductTest()
         {
+            ProductModel dataBaseProduct = null;
             var product = GetDefaultModel();
+
             _mockCategory.Setup(x => x.Exist(product.CategoryId)).ReturnsAsync(true);
+            _mockProduct.Setup(x => x.GetByName(product.Name)).ReturnsAsync(dataBaseProduct);
 
             var result = _validator.TestValidate(product);
 
@@ -51,6 +57,19 @@ namespace DigitalMenu.Tests
             var result = _validator.TestValidate(product);
 
             result.ShouldHaveValidationErrorFor(x => x.Name).WithErrorMessage("Nome do produto não pode ultrapassar 50 caracteres.");
+        }
+
+        [Test]
+        public void AlreadyUsedNameTest()
+        {
+            var dataBaseProduct = GetDefaultModel();
+            var product = GetDefaultModel();
+
+            _mockProduct.Setup(x => x.GetByName(product.Name)).ReturnsAsync(dataBaseProduct);
+
+            var result = _validator.TestValidate(product);
+
+            result.ShouldHaveValidationErrorFor(x => x.Name).WithErrorMessage("Nome já utilizado por outro produto.");
         }
 
         [Test]

@@ -10,5 +10,6 @@ namespace DigitalMenu.Core.Interfaces
 {
     public interface IRepositoryCategory : IRepositoryBase<CategoryObj>
     {
+        Task<CategoryObj> GetByName(string name);
     }
 }

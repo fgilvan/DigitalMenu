@@ -19,5 +19,14 @@ namespace DigitalMenu.Application.Services
             :base(repositoryProduct, mapper)
         {
         }
+
+        public async Task<ProductModel> GetByName(string name)
+        {
+            var objList = await ((IRepositoryProduct)Repositorio).GetByName(name);
+
+            var models = Mapper.Map<ProductModel>(objList);
+
+            return models;
+        }
     }
 }

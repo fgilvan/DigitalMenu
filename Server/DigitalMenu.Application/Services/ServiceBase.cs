@@ -26,71 +26,75 @@ namespace DigitalMenu.Application.Services
             _mapper = mapper;
         }
 
+        protected IRepositoryBase<TObj> Repositorio => _repository;
+
+        protected IMapper Mapper => _mapper;
+
         public async Task<TModel[]> GetAll()
         {
-            var objList = await _repository.GetAll();
+            var objList = await Repositorio.GetAll();
 
-            var models = _mapper.Map<TModel[]>(objList);
+            var models = Mapper.Map<TModel[]>(objList);
 
             return models;
         }
 
         public async Task<TModel> Get(Guid id)
         {
-            var obj = await _repository.Get(id, false);
+            var obj = await Repositorio.Get(id, false);
 
             if (obj == null)
             {
                 throw new NotFoundException("Registro Não Encontrado.");
             }
 
-            var model = _mapper.Map<TModel>(obj);
+            var model = Mapper.Map<TModel>(obj);
 
             return model;
         }
 
         public async Task<bool> Exist(Guid id)
         {
-            var obj = await _repository.Get(id, false);
+            var obj = await Repositorio.Get(id, false);
 
             return obj != null;
         }
 
         public async Task Add(TModel model)
         {
-            var obj = _mapper.Map<TObj>(model);
+            var obj = Mapper.Map<TObj>(model);
 
-            _repository.Add(obj);
+            Repositorio.Add(obj);
 
-            await _repository.SaveChangesAsync();
+            await Repositorio.SaveChangesAsync();
         }
 
         public async Task Update(Guid id, TModel model)
         {
-            var obj = await _repository.Get(id, true);
+            var obj = await Repositorio.Get(id, true);
 
             if(obj == null)
             {
                 throw new NotFoundException("Registro Não Encontrado.");
             }
 
-            obj = _mapper.Map<TObj>(model);
+            obj = Mapper.Map<TObj>(model);
 
-            _repository.Update(obj);
-            await _repository.SaveChangesAsync();
+            Repositorio.Update(obj);
+            await Repositorio.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
         {
-            var obj = await _repository.Get(id, true);
+            var obj = await Repositorio.Get(id, true);
 
             if (obj == null)
             {
                 throw new NotFoundException("Registro Não Encontrado.");
             }
 
-            _repository.Delete(obj);
-            await _repository.SaveChangesAsync();
+            Repositorio.Delete(obj);
+            await Repositorio.SaveChangesAsync();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace DigitalMenu.Application.Interfaces
 {
     public interface IServiceCategory : IServiceBase<CategoryModel>
     {
+        Task<CategoryModel> GetByName(string name);
     }
 }

@@ -22,7 +22,7 @@ namespace DigitalMenu.Infrastructure.Persistence
         }
 
         public DbSet<ProductObj> Product { get; set; }
-
+        public DbSet<CategoryObj> Category { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -16,5 +16,13 @@ namespace DigitalMenu.Infrastructure.Persistence.Repository
             :base(applicationDbContext)
         {
         }
+        public Task<CategoryObj> GetByName(string name)
+        {
+            var obj = ApplicationDbContext.Category.FirstOrDefaultAsync(x => x.Name == name);
+
+            ApplicationDbContext.Entry(obj).State = EntityState.Detached;
+
+            return obj;
+        }
     }
 }

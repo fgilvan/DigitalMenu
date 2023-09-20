@@ -1,4 +1,5 @@
 ﻿using DigitalMenu.Application.Interfaces;
+using DigitalMenu.Core.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using System;
@@ -12,10 +13,12 @@ namespace DigitalMenu.Application.Model.Product
     public class ProductValidator: AbstractValidator<ProductModel>
     {
         private IServiceCategory _serviceCategory;
+        private IServiceProduct _serviceProduct;
 
-        public ProductValidator(IServiceCategory serviceCategory) 
+        public ProductValidator(IServiceCategory serviceCategory, IServiceProduct serviceProduct) 
         {
             _serviceCategory = serviceCategory;
+            _serviceProduct = serviceProduct;
 
             ValidatorName();
             ValidatorDescription();
@@ -40,6 +43,11 @@ namespace DigitalMenu.Application.Model.Product
             RuleFor(x => x.Name)
                 .MaximumLength(50)
                 .WithMessage("Nome do produto não pode ultrapassar 50 caracteres.");
+
+            RuleFor(x => x.Name)
+                .Must(x => _serviceProduct.GetByName(x).Result == null)
+                .When(x =>  x.Name.HasValue())
+                .WithMessage("Nome já utilizado por outro produto.");
         }
 
         private void ValidatorCategory()

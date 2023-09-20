@@ -1,4 +1,5 @@
-﻿using DigitalMenu.Core.Entities.Product;
+﻿using DigitalMenu.Core.Entities.Category;
+using DigitalMenu.Core.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace DigitalMenu.Core.Interfaces
 {
     public interface IRepositoryProduct: IRepositoryBase<ProductObj>
     {
+        Task<ProductObj> GetByName(string name);
     }
 }

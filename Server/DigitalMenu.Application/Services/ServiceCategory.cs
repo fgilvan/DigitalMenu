@@ -21,5 +21,14 @@ namespace DigitalMenu.Application.Services
             :base(repositoryCategory, mapper)
         {
         }
+
+        public async Task<CategoryModel> GetByName(string name)
+        {
+            var objList = await ((IRepositoryCategory)Repositorio).GetByName(name);
+
+            var models = Mapper.Map<CategoryModel>(objList);
+
+            return models;
+        }
     }
 }
