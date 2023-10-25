@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>1e484090-f476-4a19-9d10-a0cf84bfd00f</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn):1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
