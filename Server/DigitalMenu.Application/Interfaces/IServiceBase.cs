@@ -18,7 +18,7 @@ namespace DigitalMenu.Application.Interfaces
 
         Task Add(T entity);
 
-        Task Update(Guid id, T entity);
+        Task Update(T entity);
 
         Task Delete(Guid id);
     }

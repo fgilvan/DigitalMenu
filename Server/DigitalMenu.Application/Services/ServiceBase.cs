@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DigitalMenu.Application.Exceptions;
 using DigitalMenu.Application.Interfaces;
+using DigitalMenu.Application.Model;
 using DigitalMenu.Application.Model.Product;
 using DigitalMenu.Core.Entities;
 using DigitalMenu.Core.Entities.Product;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 namespace DigitalMenu.Application.Services
 {
     public class ServiceBase<TModel, TObj> : IServiceBase<TModel>
+        where TModel : ModelBase
     {
         private IRepositoryBase<TObj> _repository;
         private IMapper _mapper;
@@ -69,9 +71,9 @@ namespace DigitalMenu.Application.Services
             await Repositorio.SaveChangesAsync();
         }
 
-        public async Task Update(Guid id, TModel model)
+        public async Task Update(TModel model)
         {
-            var obj = await Repositorio.Get(id, true);
+            var obj = await Repositorio.Get(model.Id, true);
 
             if(obj == null)
             {

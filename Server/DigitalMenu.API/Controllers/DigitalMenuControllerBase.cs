@@ -115,7 +115,7 @@ namespace DigitalMenu.API.Controllers
                     return BadRequest();
                 }
 
-                await _service.Update(id, model);
+                await _service.Update(model);
 
                 return Ok(model);
             }
