@@ -1,4 +1,5 @@
 ﻿using DigitalMenu.Application.Interfaces;
+using DigitalMenu.Application.Model.Category;
 using DigitalMenu.Core.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
@@ -45,6 +46,10 @@ namespace DigitalMenu.Application.Model.Product
                 .WithMessage("Nome do produto não pode ultrapassar 50 caracteres.");
 
             RuleFor(x => x)
+                .Cascade(CascadeMode.Stop)
+                .Must(InDataBase)
+                .When(x => x.Id != Guid.Empty)
+                .WithMessage("Categoria não encontrada.")
                 .Must(AlreadyUsedName)
                 .When(x =>  x.Name.HasValue())
                 .OverridePropertyName(x => x.Name)
@@ -62,6 +67,11 @@ namespace DigitalMenu.Application.Model.Product
                 .Must(VerifyCategory)
                 .When(x => x.CategoryId != Guid.Empty)
                 .WithMessage("Categoria do produto é inválida.");
+        }
+        
+        private bool InDataBase(ProductModel model)
+        {
+            return _serviceProduct.Exist(model.Id).Result;
         }
 
         private bool AlreadyUsedName(ProductModel model)

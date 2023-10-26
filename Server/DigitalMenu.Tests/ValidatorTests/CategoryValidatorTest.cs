@@ -25,6 +25,7 @@ namespace DigitalMenu.Tests
             var category = GetDefaultModel();
 
             _mockCategory.Setup(x => x.GetByName(category.Name)).ReturnsAsync(dataBaseCategory);
+            _mockCategory.Setup(x => x.Exist(category.Id)).ReturnsAsync(true);
 
             var result = _validator.TestValidate(category);
 
@@ -60,6 +61,7 @@ namespace DigitalMenu.Tests
             var category = GetDefaultModel();
 
             _mockCategory.Setup(x => x.GetByName(category.Name)).ReturnsAsync(dataBaseCategory);
+            _mockCategory.Setup(x => x.Exist(category.Id)).ReturnsAsync(true);
 
             var result = _validator.TestValidate(category);
 

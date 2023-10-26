@@ -35,10 +35,19 @@ namespace DigitalMenu.Application.Model.Category
                 .WithMessage("Nome da categoria não pode ultrapassar 50 caracteres.");
 
             RuleFor(x => x)
+                .Cascade(CascadeMode.Stop)
+                .Must(InDataBase)
+                .When(x => x.Id != Guid.Empty)
+                .WithMessage("Categoria não encontrada.")
                 .Must(AlreadyUsedName)
                 .When(x => x.Name.HasValue())
-                .OverridePropertyName(x => x.Name)
-                .WithMessage("Nome já utilizado por outra categoria.");
+                .WithMessage("Nome já utilizado por outra categoria.")
+                .OverridePropertyName(x => x.Name);
+        }
+
+        private bool InDataBase(CategoryModel model)
+        {
+            return _serviceCategory.Exist(model.Id).Result;
         }
 
         private bool AlreadyUsedName(CategoryModel model)

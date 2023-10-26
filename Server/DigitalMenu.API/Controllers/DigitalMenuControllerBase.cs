@@ -119,10 +119,6 @@ namespace DigitalMenu.API.Controllers
 
                 return Ok(model);
             }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
